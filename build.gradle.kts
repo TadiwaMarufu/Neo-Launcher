@@ -86,7 +86,7 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        minSdk = 30
+        minSdk = 26
         targetSdk = 36
         applicationId = "com.saggitt.omega"
         javaCompileOptions.annotationProcessorOptions.arguments["dagger.hilt.disableModulesHaveInstallInCheck"] =
