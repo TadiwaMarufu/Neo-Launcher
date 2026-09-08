@@ -30,6 +30,7 @@ import androidx.navigation.compose.NavHost
 object Routes {
     const val PREFS_MAIN = "prefs_main"
     const val PREFS_WIDGETS = "prefs_widgets"
+    const val PREFS_NOW_BRIEF = "prefs_now_brief"
     const val PREFS_SEARCH = "prefs_search"
     const val EDIT_ICON = "edit_icon"
     const val CATEGORIZE_APPS = "categorize_apps"

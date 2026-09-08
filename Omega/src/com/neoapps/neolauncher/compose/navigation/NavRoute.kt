@@ -62,6 +62,9 @@ open class NavRoute : Parcelable {
     open class Widgets : NavRoute() {
         @Serializable
         class NotificationDots : Widgets()
+
+        @Serializable
+        class NowBrief : Widgets()
     }
 
     @Serializable

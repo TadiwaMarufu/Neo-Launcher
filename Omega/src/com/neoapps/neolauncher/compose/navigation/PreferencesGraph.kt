@@ -15,6 +15,7 @@ import com.neoapps.neolauncher.compose.pages.EditIconPage
 import com.neoapps.neolauncher.compose.pages.preferences.DrawerFolderPage
 import com.neoapps.neolauncher.compose.pages.preferences.EditDashPage
 import com.neoapps.neolauncher.compose.pages.preferences.MainPrefsPage
+import com.neoapps.neolauncher.compose.pages.preferences.NowBriefPrefsPage
 import com.neoapps.neolauncher.compose.pages.preferences.SearchProvidersPage
 import com.neoapps.neolauncher.compose.pages.preferences.WidgetsPrefsPage
 import com.neoapps.neolauncher.util.getUserForProfileId
@@ -37,6 +38,7 @@ inline fun <reified T : Any> NavGraphBuilder.preferenceGraph(
 fun NavGraphBuilder.prefsGraph() {
     preferenceGraph<NavRoute.Main>(deepLink = Routes.PREFS_MAIN) { MainPrefsPage() }
     preferenceGraph<NavRoute.Widgets>(deepLink = Routes.PREFS_WIDGETS) { WidgetsPrefsPage() }
+    preferenceGraph<NavRoute.Widgets.NowBrief>(deepLink = Routes.PREFS_NOW_BRIEF) { NowBriefPrefsPage() }
     preferenceGraph<NavRoute.Search.SearchProviders>(deepLink = Routes.PREFS_SEARCH) { SearchProvidersPage() }
     preferenceGraph<NavRoute.Gestures.EditDash>(deepLink = Routes.EDIT_DASH) { EditDashPage() }
     preferenceGraph<NavRoute.Drawer.Categorize>(deepLink = Routes.CATEGORIZE_APPS) { AppCategoriesPage() }
