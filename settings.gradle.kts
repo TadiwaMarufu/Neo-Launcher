@@ -8,8 +8,10 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenCentral()
         google()
+        maven(url = "https://repo1.maven.org/maven2")
+        maven(url = "https://maven.aliyun.com/repository/public")
+        mavenCentral()
         maven(url = "https://jitpack.io")
     }
 }

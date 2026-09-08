@@ -15,7 +15,7 @@ android {
     namespace = "com.android.wm.shell"
     compileSdk = 37
     defaultConfig {
-        minSdk = 30
+        minSdk = 26
     }
     sourceSets {
         named("main") {
