@@ -280,6 +280,9 @@ fun MainPrefsPage() {
                         is NavRoute.Widgets.NotificationDots
                             -> ColorSelectionPage(PrefKey.NOTIFICATION_DOTS_COLOR)
 
+                        is NavRoute.Widgets.NowBrief
+                            -> NowBriefPrefsPage()
+
                         is NavRoute.Widgets
                             -> WidgetsPrefsPage()
 

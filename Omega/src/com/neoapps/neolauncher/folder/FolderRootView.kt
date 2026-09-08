@@ -2,6 +2,7 @@ package com.neoapps.neolauncher.folder
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.widget.LinearLayout
@@ -14,6 +15,17 @@ class FolderRootView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr), ClipPathView {
     private var mClipPath: Path? = null
+    private var blurEnabled: Boolean = true
+    private val blurPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    init {
+        setWillNotDraw(false)
+    }
+
+    fun setBlurEnabled(enabled: Boolean) {
+        blurEnabled = enabled
+        invalidate()
+    }
 
     override fun onDraw(canvas: Canvas) {
         if (mClipPath == null) {
