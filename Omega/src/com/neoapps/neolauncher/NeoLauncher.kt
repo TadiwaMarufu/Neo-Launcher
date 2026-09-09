@@ -126,31 +126,38 @@ class NeoLauncher : Launcher(), SavedStateRegistryOwner,
         config.setAppLanguage(prefs.profileLanguage.getValue())
         mOverlayManager = defaultOverlay
         val camManager = getSystemService(CAMERA_SERVICE) as CameraManager?
-        camManager?.registerTorchCallback(object : CameraManager.TorchCallback() {
-            override fun onTorchModeUnavailable(cameraId: String) {
-            }
+        if (camManager != null) {
+            try {
+                camManager.registerTorchCallback(object : CameraManager.TorchCallback() {
+                    override fun onTorchModeUnavailable(cameraId: String) {}
 
-            override fun onTorchModeChanged(cameraId: String, enabled: Boolean) {
-                coroutineScope.launch {
-                    if (cameraId == camManager.cameraIdList[0]) {
-                        prefs.dashTorchState.setValue(enabled)
+                    override fun onTorchModeChanged(cameraId: String, enabled: Boolean) {
+                        coroutineScope.launch {
+                            val cameraIds = camManager.cameraIdList
+                            if (cameraIds.isNotEmpty() && cameraId == cameraIds[0]) {
+                                prefs.dashTorchState.setValue(enabled)
+                            }
+                        }
                     }
-                }
+                }, Handler(Looper.getMainLooper()))
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        }, Handler(Looper.getMainLooper()))
+        }
 
         NeoApp.instance?.onLauncherAppStateCreated()
         themeOverride = ThemeOverride(themeSet, this)
         themeOverride.applyTheme(this)
         currentAccent = prefs.profileAccentColor.getColor()
         currentTheme = themeOverride.getTheme(this)
-        theme.applyStyle(
-            resources.getIdentifier(
-                Integer.toHexString(currentAccent),
-                "style",
-                packageName
-            ), true
+        val resId = resources.getIdentifier(
+            Integer.toHexString(currentAccent),
+            "style",
+            packageName
         )
+        if (resId != 0) {
+            theme.applyStyle(resId, true)
+        }
     }
 
 
