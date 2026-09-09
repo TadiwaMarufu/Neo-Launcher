@@ -51,13 +51,17 @@ class NeoApp : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        startKoin {
-            androidLogger()
-            androidContext(this@NeoApp)
-            modules(
-                prefsModule,
-                reposModule,
-            )
+        try {
+            startKoin {
+                androidLogger(org.koin.core.logger.Level.ERROR)
+                androidContext(this@NeoApp)
+                modules(
+                    prefsModule,
+                    reposModule,
+                )
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "Koin init exception: ${e.message}")
         }
         if (minSDK(Build.VERSION_CODES.P)) {
             try {
