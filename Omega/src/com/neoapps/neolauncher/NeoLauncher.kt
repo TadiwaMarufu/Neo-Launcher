@@ -102,8 +102,8 @@ class NeoLauncher : Launcher(), SavedStateRegistryOwner,
     val gestureController by lazy { GestureController(this) }
     private lateinit var themeOverride: ThemeOverride
     private val themeSet: ThemeOverride.ThemeSet get() = ThemeOverride.Settings()
-    val optionsView by lazy { findViewById<OptionsPopupView<Launcher>>(R.id.options_view)!! }
-    val dummyView by lazy { findViewById<View>(R.id.dummy_view)!! }
+    val optionsView by lazy { findViewById<OptionsPopupView<Launcher>>(R.id.options_view) }
+    val dummyView by lazy { findViewById<View>(R.id.dummy_view) }
 
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
     override val savedStateRegistry: SavedStateRegistry
@@ -573,14 +573,15 @@ class NeoLauncher : Launcher(), SavedStateRegistryOwner,
         left: Int, top: Int, right: Int, bottom: Int,
         crossinline callback: (View) -> Unit,
     ) {
-        (dummyView.layoutParams as ViewGroup.MarginLayoutParams).let {
+        val view = dummyView ?: return
+        (view.layoutParams as ViewGroup.MarginLayoutParams).let {
             it.width = right - left
             it.height = bottom - top
             it.leftMargin = left
             it.topMargin = top
         }
-        dummyView.requestLayout()
-        dummyView.post { callback(dummyView) }
+        view.requestLayout()
+        view.post { callback(view) }
     }
 
     fun getViewBounds(v: View): Rect {
